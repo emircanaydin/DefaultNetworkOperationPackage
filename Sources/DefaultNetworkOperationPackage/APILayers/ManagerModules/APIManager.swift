@@ -37,19 +37,18 @@ public class APIManager: APIManagerInterface {
     private func dataTaskHandler<R: Codable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, completion: @escaping (Result<R, ErrorResponse>) -> Void) {
         
         if error != nil {
-            // completion failure
-            print("makasi : \(String(describing: error))")
+            print("error : \(String(describing: error))")
+            completion(.failure(error))
         }
         
         if let data = data {
             
             do {
-                print(String(data: data, encoding: .utf8)!)
                 let dataDecoded = try jsonDecoder.decode(R.self, from: data)
                 print("data : \(data)")
                 completion(.success(dataDecoded))
             } catch let error {
-                // completion failure
+                completion(.failure(error))
                 print("error :\(error)")
             }
         }
