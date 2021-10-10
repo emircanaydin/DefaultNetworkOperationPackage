@@ -38,7 +38,7 @@ public class APIManager: APIManagerInterface {
         
         if error != nil {
             print("error : \(String(describing: error))")
-            completion(.failure(error))
+            completion(.failure(error as! ErrorResponse))
         }
         
         if let data = data {
@@ -48,7 +48,7 @@ public class APIManager: APIManagerInterface {
                 print("data : \(data)")
                 completion(.success(dataDecoded))
             } catch let error {
-                completion(.failure(error))
+                completion(.failure(error as! ErrorResponse))
                 print("error :\(error)")
             }
         }
