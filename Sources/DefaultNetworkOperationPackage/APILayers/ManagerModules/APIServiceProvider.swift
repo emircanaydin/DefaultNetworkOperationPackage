@@ -30,16 +30,13 @@ open class ApiServiceProvider<T: Codable>: URLRequestProtocol {
         var url = try baseUrl.asURL()
         
         if let path = path {
-            let urlpath = url.appendingPathComponent(path).absoluteString.removingPercentEncoding
-            print("url: \(urlpath)")
+            let urlWithPath = url.appendingPathComponent(path).absoluteString.removingPercentEncoding
+            url = URL(string: urlWithPath!) ?? url
         }
-        
-        print("bkk url ne: \(url.description)")
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.headers = headers
-        
         try configureEncoding(request: &request)
         
         return request
