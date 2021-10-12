@@ -34,6 +34,8 @@ open class ApiServiceProvider<T: Codable>: URLRequestProtocol {
             print("url: \(urlpath)")
         }
         
+        print("bkk url ne: \(url.description)")
+        
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.headers = headers
