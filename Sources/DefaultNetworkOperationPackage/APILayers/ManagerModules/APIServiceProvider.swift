@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Foundation
+
 open class ApiServiceProvider<T: Codable>: URLRequestProtocol {
 
     private var method: HTTPMethod
@@ -30,13 +32,13 @@ open class ApiServiceProvider<T: Codable>: URLRequestProtocol {
         var url = try baseUrl.asURL()
         
         if let path = path {
-            let urlWithPath = url.appendingPathComponent(path)
-            url = URL(string: urlWithPath!) ?? url
+            url = url.appendingPathComponent(path)
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.headers = headers
+        
         try configureEncoding(request: &request)
         
         return request
