@@ -38,6 +38,7 @@ public class APIManager: APIManagerInterface {
         
         if error != nil {
             print("error : \(String(describing: error))")
+            completion(.failure(ErrorResponse(serverResponse: ServerResponse(returnMessage: error!.localizedDescription, returnCode: error!._code), apiConnectionErrorType: .serverError(error!._code))))
         }
         
         if let data = data {
@@ -47,6 +48,7 @@ public class APIManager: APIManagerInterface {
                 print("data : \(data)")
                 completion(.success(dataDecoded))
             } catch let error {
+                let errorResponse = ErrorResponse(serverResponse: ServerResponse(returnMessage: error.localizedDescription, returnCode: error._code), apiConnectionErrorType: .dataDecodedFailed(error.localizedDescription))
                 print("error :\(error)")
             }
         }
