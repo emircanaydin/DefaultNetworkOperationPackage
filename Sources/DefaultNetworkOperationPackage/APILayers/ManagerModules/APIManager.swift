@@ -13,7 +13,7 @@ public class APIManager: APIManagerInterface {
     public static let shared = APIManager()
 
     // Mark: - Session -
-    private let session: URLSession
+    private var session: URLSession
 
     // Mark: - JsonDecoder -
     private var jsonDecoder = JSONDecoder()
