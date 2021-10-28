@@ -61,6 +61,10 @@ public class APIManager: APIManagerInterface {
         apiCallListener?.onPostExecute()
     }
     
+    public func cancelRequest() {
+        session.invalidateAndCancel()
+    }
+    
     deinit {
         print("DEINIT APIMANAGER")
     }
