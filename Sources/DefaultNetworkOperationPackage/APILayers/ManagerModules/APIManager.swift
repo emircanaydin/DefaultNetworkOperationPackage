@@ -63,6 +63,11 @@ public class APIManager: APIManagerInterface {
     
     public func cancelRequest() {
         session.invalidateAndCancel()
+        let config = URLSessionConfiguration.default
+        config.waitsForConnectivity = true
+        config.timeoutIntervalForResource = 300
+        config.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        session = URLSession(configuration: config)
     }
     
     deinit {
