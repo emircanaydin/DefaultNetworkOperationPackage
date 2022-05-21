@@ -56,18 +56,10 @@ public class APIManager: APIManagerInterface {
             } catch let error {
                 let errorResponse = ErrorResponse(serverResponse: ServerResponse(returnMessage: error.localizedDescription, returnCode: error._code), apiConnectionErrorType: .dataDecodedFailed(error.localizedDescription))
                 print("error :\(error)")
+                completion(.failure(errorResponse))
             }
         }
         apiCallListener?.onPostExecute()
-    }
-    
-    public func cancelRequest() {
-        session.invalidateAndCancel()
-        let config = URLSessionConfiguration.default
-        config.waitsForConnectivity = true
-        config.timeoutIntervalForResource = 300
-        config.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-        session = URLSession(configuration: config)
     }
     
     deinit {
