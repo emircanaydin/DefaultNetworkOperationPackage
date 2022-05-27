@@ -35,6 +35,9 @@ open class ApiServiceProvider<T: Codable>: URLRequestProtocol {
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        
+        var headers = headers
+        headers.add(HTTPHeader(name: HTTPHeaderFields.contentType.value.0, value: HTTPHeaderFields.contentType.value.1))
         request.headers = headers
         
         try configureEncoding(request: &request)
@@ -57,10 +60,5 @@ open class ApiServiceProvider<T: Codable>: URLRequestProtocol {
         return data.asDictionary()
     }
 
-    private var headers: HTTPHeaders {
-        var httpHeaders = HTTPHeaders()
-        httpHeaders.add(HTTPHeader(name: HTTPHeaderFields.contentType.value.0, value: HTTPHeaderFields.contentType.value.1))
-        return httpHeaders
-    }
-    
+    public var headers: HTTPHeaders = HTTPHeaders()
 }
