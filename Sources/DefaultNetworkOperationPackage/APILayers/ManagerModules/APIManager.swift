@@ -50,8 +50,8 @@ public class APIManager: APIManagerInterface {
         if let data = data {
             
             do {
+                print("data: \(String(data: data, encoding: .utf8))")
                 let dataDecoded = try jsonDecoder.decode(R.self, from: data)
-                print("data : \(data)")
                 completion(.success(dataDecoded))
             } catch let error {
                 let errorResponse = ErrorResponse(serverResponse: ServerResponse(returnMessage: error.localizedDescription, returnCode: error._code), apiConnectionErrorType: .dataDecodedFailed(error.localizedDescription))
